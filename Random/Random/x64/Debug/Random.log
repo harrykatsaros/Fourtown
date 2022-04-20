@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\henga\source\repos\Random\Random\main.cpp(81,11): warning C4101: 'board': unreferenced local variable
+  Random.vcxproj -> C:\Users\henga\source\repos\Random\x64\Debug\Random.exe
