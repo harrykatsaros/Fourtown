@@ -97,12 +97,22 @@ int main() {
     bool menu = true;
     // init Game -> fill Board with empty coins and ask for game mode
     
-    
+    int BOARD_Y_SIZE = 6;
+    int BOARD_X_SIZE = 7;
+    int spaceY = 20;
+    int radius = 40;
+    int spaceX = 20;
+    sf::Color emptyColor(150, 200, 224);
+    sf::Color redColor(214, 30, 0);
+    sf::Color yellowColor(235, 235, 0);
+    sf::Color lineColor(0, 51, 102);
+    sf::Color boardColor(0, 102, 153);
+    sf::Color highlightColor(255, 153, 0);
     //initGame(board);
 
 
 	
-    sf::RenderWindow window(sf::VideoMode(800, 800), "Connect Four");
+    sf::RenderWindow window(sf::VideoMode(800, 900), "Connect Four");
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -118,7 +128,7 @@ int main() {
                 window.close();
         }
 
-        // clear the window with black color
+        // clear the window 
         window.clear(sf::Color::Black);
 
         sf::Font font;
@@ -132,7 +142,7 @@ int main() {
         title.setFont(font); 
         title.setString("Connect Four");
         title.setCharacterSize(50);
-        title.setFillColor(sf::Color::White);
+        title.setFillColor(emptyColor);
         title.setStyle(sf::Text::Bold | sf::Text::Underlined);
         title.setOrigin(150, 0);
         title.setPosition(400.f, 10.f);
@@ -141,10 +151,10 @@ int main() {
         info.setFont(font);
         info.setString("Player One moves");
         info.setCharacterSize(50);
-        info.setFillColor(sf::Color::White);
+        info.setFillColor(emptyColor);
         info.setStyle(sf::Text::Bold);
         info.setOrigin(200, 0);
-        info.setPosition(400.f, 700.f);
+        info.setPosition(400.f, 800.f);
         
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
@@ -178,24 +188,14 @@ int main() {
 
 
         sf::RectangleShape rectangle(sf::Vector2f(800.f, 640.f));
-        rectangle.setPosition(0,30);
+        rectangle.setPosition(0,130);
         rectangle.setFillColor(sf::Color::Blue);
 
         window.draw(rectangle);
 
 
 
-        int BOARD_Y_SIZE = 6;
-        int BOARD_X_SIZE = 7;
-        int spaceY = 20;
-        int radius = 40;
-        int spaceX = 20;
-        sf::Color emptyColor(224, 224, 244);
-        sf::Color redColor(214, 71, 0);
-        sf::Color yellowColor(235, 235, 0);
-        sf::Color lineColor(0, 51, 102);
-        sf::Color boardColor(0, 102, 153);
-        sf::Color highlightColor(255, 153, 0);
+        
 
 
         for (int y = 1; y <= BOARD_Y_SIZE; y++)
@@ -211,7 +211,7 @@ int main() {
                 //if (Board.cell[y][x] == Empty)
                    fillColor = emptyColor;
                 //else if (board[y][x] == Red)
-                    fillColor = redColor;
+                    //fillColor = redColor;
                 //else
                     //fillColor = yellowColor;
                 // Set the color of the tokens outline
@@ -219,26 +219,15 @@ int main() {
                 
                 // Draw the circle in the buffer
                 sf::CircleShape Circle(200.f);
+                
                 Circle.setRadius(radius);
                 Circle.setFillColor(fillColor);
-                Circle.setPosition(centerX, centerY);
+                Circle.setPosition(centerX, centerY+100);
 
                 window.draw(Circle);
             }
         } 
 
-        //sf::CircleShape pieces = new sf::CircleShape[width * height];
-
-        /*for (int row = 0; row < width; row++) {
-            for (int col = 0; col < height; col++) {
-                sf::CircleShape piece(radius);
-                piece.setFillColor(emptyColor);
-                piece.setOrigin(radius, radius);
-                piece.setOutlineThickness(5);
-                piece.setOutlineColor(highlightColor);
-                window.draw(piece);
-            }
-        }*/
 
         
         sf::CircleShape circle(200.f);
@@ -289,8 +278,8 @@ int main() {
 
 
         
-        //window.draw(title);
-        //window.draw(info);
+        window.draw(title);
+        window.draw(info);
         
         //window.draw(circle);
         //window.draw(circle2);
