@@ -18,18 +18,10 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\arial.ttf">
       <Filter>Resource Files</Filter>
     </Font>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Source.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
