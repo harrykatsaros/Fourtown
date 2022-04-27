@@ -131,7 +131,39 @@ int main() {
         CircleRed.setRadius(radius);
         CircleRed.setFillColor(sf::Color::Red);
 
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left) {
+            if ((sf::Mouse::getPosition(window)).x > 50 && sf::Mouse::getPosition(window).x < 145) {
+                board._slots[0][5] = Red;
 
+            } else if ((sf::Mouse::getPosition(window)).x > 145  && sf::Mouse::getPosition(window).x < 235) {
+                CircleRed.setPosition(160, 660);
+                window.draw(CircleRed);
+
+            }
+            else if ((sf::Mouse::getPosition(window)).x > 235 && sf::Mouse::getPosition(window).x < 325) {
+                CircleRed.setPosition(260, 660);
+                window.draw(CircleRed);
+
+            }
+            else if ((sf::Mouse::getPosition(window)).x > 325 && sf::Mouse::getPosition(window).x < 415) {
+                CircleRed.setPosition(360, 660);
+                window.draw(CircleRed);
+
+            } else if ((sf::Mouse::getPosition(window)).x > 415 && sf::Mouse::getPosition(window).x < 505) {
+                CircleRed.setPosition(460, 660);
+                window.draw(CircleRed);
+
+            } else if ((sf::Mouse::getPosition(window)).x > 505 && sf::Mouse::getPosition(window).x < 625) {
+                CircleRed.setPosition(560, 660);
+                window.draw(CircleRed);
+
+            } else if ((sf::Mouse::getPosition(window)).x > 595 && sf::Mouse::getPosition(window).x < 740) {
+                CircleRed.setPosition(660, 660);
+                window.draw(CircleRed);
+
+            }
+
+        }
 
 
         for (int y = 1; y <= BOARD_Y_SIZE; y++)
@@ -166,40 +198,7 @@ int main() {
             }
         }
         
-        if (sf::Event::MouseButtonPressed) {
-            if ((sf::Mouse::getPosition(window)).x > 50 && sf::Mouse::getPosition(window).x < 145) {
-                CircleRed.setPosition(60, 660);
-                window.draw(CircleRed);
-
-            } else if ((sf::Mouse::getPosition(window)).x > 145  && sf::Mouse::getPosition(window).x < 235) {
-                CircleRed.setPosition(160, 660);
-                window.draw(CircleRed);
-
-            }
-            else if ((sf::Mouse::getPosition(window)).x > 235 && sf::Mouse::getPosition(window).x < 325) {
-                CircleRed.setPosition(260, 660);
-                window.draw(CircleRed);
-
-            }
-            else if ((sf::Mouse::getPosition(window)).x > 325 && sf::Mouse::getPosition(window).x < 415) {
-                CircleRed.setPosition(360, 660);
-                window.draw(CircleRed);
-
-            } else if ((sf::Mouse::getPosition(window)).x > 415 && sf::Mouse::getPosition(window).x < 505) {
-                CircleRed.setPosition(460, 660);
-                window.draw(CircleRed);
-
-            } else if ((sf::Mouse::getPosition(window)).x > 505 && sf::Mouse::getPosition(window).x < 625) {
-                CircleRed.setPosition(560, 660);
-                window.draw(CircleRed);
-
-            } else if ((sf::Mouse::getPosition(window)).x > 595 && sf::Mouse::getPosition(window).x < 740) {
-                CircleRed.setPosition(660, 660);
-                window.draw(CircleRed);
-
-            }
-
-        }
+        
 
 
 /*
