@@ -160,7 +160,54 @@ int main() {
             //PLAYER 1 LOOP
             pickc = choosecol(array, p1, mouse_position);
             deleterow(array, p1, pickc);
-            createarray(array);
+            //createarray(array);
+            for (int i = 0; i < 6; i++) {
+                for (int j = 0; j < 7; j++) {
+                    if (array[i][j] != 1 && array[i][j] != -1) {
+                        array[i][j] = 0;
+                    }
+                    cout << array[i][j] << " ";
+
+                }
+                cout << endl;
+            }
+
+            for (int y = 1; y <= BOARD_Y_SIZE; y++)
+            {
+                // Get the center of the next row of circles
+                float centerY = (spaceY + radius) * y + radius * (y - 1);
+                for (int x = 1; x <= BOARD_X_SIZE; x++)
+                {
+                    // Get the center of the next column of circles
+                    float centerX = (spaceX + radius) * x + radius * (x - 1);
+                    // Set the color of the circle
+                    sf::Color fillColor;
+                    if (array[x - 1][y - 1] == 0)
+                        fillColor = emptyColor;
+                    else if (array[x - 1][y - 1] == 1)
+                        fillColor = redColor;
+                    else
+                        fillColor = yellowColor;
+                    // Set the color of the tokens outline
+                    sf::Color outlineColor;
+
+                    // Draw the circle in the buffer
+                    sf::CircleShape Circle(200.f);
+
+                    Circle.setRadius(radius);
+                    Circle.setFillColor(fillColor);
+                    Circle.setPosition(centerX, centerY + 100);
+
+                    window.draw(Circle);
+                }
+            }
+
+
+
+
+
+
+
             win = checkwin(array, p1);
 
             if (win == true) {
@@ -173,7 +220,54 @@ int main() {
             //PLAYER 2 LOOP
             pickc = choosecol(array, p2, mouse_position);
             deleterow(array, p2, pickc);
-            createarray(array);
+            //createarray(array);
+            for (int i = 0; i < 6; i++) {
+                for (int j = 0; j < 7; j++) {
+                    if (array[i][j] != 1 && array[i][j] != -1) {
+                        array[i][j] = 0;
+                    }
+                    cout << array[i][j] << " ";
+
+                }
+                cout << endl;
+            }
+
+            for (int y = 1; y <= BOARD_Y_SIZE; y++)
+            {
+                // Get the center of the next row of circles
+                float centerY = (spaceY + radius) * y + radius * (y - 1);
+                for (int x = 1; x <= BOARD_X_SIZE; x++)
+                {
+                    // Get the center of the next column of circles
+                    float centerX = (spaceX + radius) * x + radius * (x - 1);
+                    // Set the color of the circle
+                    sf::Color fillColor;
+                    if (array[x - 1][y - 1] == 0)
+                        fillColor = emptyColor;
+                    else if (array[x - 1][y - 1] == 1)
+                        fillColor = redColor;
+                    else
+                        fillColor = yellowColor;
+                    // Set the color of the tokens outline
+                    sf::Color outlineColor;
+
+                    // Draw the circle in the buffer
+                    sf::CircleShape Circle(200.f);
+
+                    Circle.setRadius(radius);
+                    Circle.setFillColor(fillColor);
+                    Circle.setPosition(centerX, centerY + 100);
+
+                    window.draw(Circle);
+                }
+            }
+
+
+
+
+
+
+
             win = checkwin(array, p2);
             if (win == true) {
                 displaywinner(p2);
@@ -364,7 +458,7 @@ void createarray(int array[][col]) {
         }
         cout << endl;
     }
-
+    /*
     for (int y = 1; y <= BOARD_Y_SIZE; y++)
     {
         // Get the center of the next row of circles
@@ -393,7 +487,7 @@ void createarray(int array[][col]) {
 
             window.draw(Circle);
         }
-    }
+    } */
 }
 
 bool checkwin(int array[][col], player active) {
