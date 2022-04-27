@@ -62,7 +62,7 @@ int restart(int array[][col]);
 
 
 int main() {
-    
+
     player p1, p2;
     int array[row][col];
     int pickc;
@@ -95,14 +95,14 @@ int main() {
     p2.name = "Player 2";
     p2.color = -1;
 
-   
-  
+
+
 
     // menu
     bool menu = true;
     // init Game -> fill Board with empty coins and ask for game mode
-    
-    
+
+
 
 
 
@@ -116,21 +116,21 @@ int main() {
             board._slots[x][y] = Empty;
             cout << board._slots[x][y];
         }
-        cout<<endl;
+        cout << endl;
     }
-    
+
     createarray(array);
 
-    
+
     sf::RenderWindow window(sf::VideoMode(800, 900), "Connect Four");
 
     // run the program as long as the window is open
     while (window.isOpen())
-    {    
+    {
 
         sf::Event event;
         while (window.pollEvent(event))
-        {          
+        {
             if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
                 window.close();
             }
@@ -220,7 +220,7 @@ int main() {
             //PLAYER 2 LOOP
             pickc = choosecol(array, p2, mouse_position);
             deleterow(array, p2, pickc);
-            //createarray(array);
+            //createarray(array); vvv this is what create arry should do, but we got rid of the create array function and added it to the main code 
             for (int i = 0; i < 6; i++) {
                 for (int j = 0; j < 7; j++) {
                     if (array[i][j] != 1 && array[i][j] != -1) {
@@ -284,23 +284,23 @@ int main() {
             }
         }
 
-        
 
-        
+
+
 
         /////// MOUSE STUFF ////////
 
         // Moved into Choose Column function. 
-        
+
 
         ///////////window stuff///////////////////
 
 
         sf::Vector2u size = window.getSize();
         unsigned int width = size.x;
-        unsigned int height = size.y; 
+        unsigned int height = size.y;
 
-    
+
 
         /////////DRAWING BOARD STUFF /////////////////
 
@@ -324,7 +324,7 @@ int main() {
 
         window.draw(title);
         window.draw(info);
-        
+
 
 
         // end the current frame
@@ -333,7 +333,7 @@ int main() {
 
 
     return 0;
-    
+
 }
 
 int choosecol(int array[][col], player active, sf::Vector2i mouse_position) {
@@ -344,13 +344,13 @@ int choosecol(int array[][col], player active, sf::Vector2i mouse_position) {
         //cout << "Please enter a number between 1 and 6: ";
         //cin >> pickc;
 
-        
+
 
         cout << mouse_position.x << " " << mouse_position.y << endl;
         if ((mouse_position.y < 741 && mouse_position.y > 159) && sf::Mouse::isButtonPressed(sf::Mouse::Left)) { //if within playable region
 
             if ((mouse_position.x < 140 && mouse_position.x > 60)) { // check if within each column
-                           
+
                 pickc = 1;
 
             }
@@ -477,14 +477,11 @@ void createarray(int array[][col]) {
                 fillColor = yellowColor;
             // Set the color of the tokens outline
             sf::Color outlineColor;
-
             // Draw the circle in the buffer
             sf::CircleShape Circle(200.f);
-
             Circle.setRadius(radius);
             Circle.setFillColor(fillColor);
             Circle.setPosition(centerX, centerY + 100);
-
             window.draw(Circle);
         }
     } */
