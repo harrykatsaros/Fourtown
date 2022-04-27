@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <fstream>
@@ -26,7 +25,7 @@ struct Board {
 int main() {
 
     //std::ofstream{ "Hello.txt" }; 
-    
+
 
     // create Board
     Board board;
@@ -56,19 +55,36 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(800, 800), "Connect Four");
 
     window.setKeyRepeatEnabled(false);
+    
+    
+    
+    /////First change was to initalize the game board as empty to make sure every circle is white ////////
+    for (int y = 0; y < BOARD_Y_SIZE; y++)
+    {
+        // Get the center of the next row of circles
+        for (int x = 0; x < BOARD_X_SIZE; x++)
+        {
+            board._slots[y][x] = Empty;
+            cout << board._slots[y][x];
+        }
+        cout << endl;
+    }
 
-
-
+    
+    
+    
+    
+    
     // run the program as long as the window is open
     while (window.isOpen())
     {
         sf::Event event;
         while (window.pollEvent(event)) {
             switch (event.type) {
-                case sf::Event::MouseButtonPressed:
-                    cout << "Button " << event.mouseButton.button << " @ "
-                        << sf::Mouse::getPosition(window).x << ", "
-                        << sf::Mouse::getPosition(window).y << "\n";
+            case sf::Event::MouseButtonPressed:
+                cout << "Button " << event.mouseButton.button << " @ "
+                    << sf::Mouse::getPosition(window).x << ", "
+                    << sf::Mouse::getPosition(window).y << "\n";
 
                 break;
             }
@@ -86,16 +102,16 @@ int main() {
         // clear the window with black color
         window.clear(sf::Color::Black);
 
-        
+
         sf::Font font;
-        
-          if (!font.loadFromFile("sansation.ttf"))
-         {
-             cout << "Error" << endl;
-         }
+
+        if (!font.loadFromFile("arial.ttf"))
+        {
+            cout << "Error" << endl;
+        }
 
 
-         
+
 
         sf::Text title;
         title.setFont(font);
@@ -130,36 +146,36 @@ int main() {
         sf::CircleShape CircleRed(200.f);
         CircleRed.setRadius(radius);
         CircleRed.setFillColor(sf::Color::Red);
-
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left) {
+    
+        
+        //////Second change was to move this up, and take out all the CircleReds and change the individual slots in the struct////
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             if ((sf::Mouse::getPosition(window)).x > 50 && sf::Mouse::getPosition(window).x < 145) {
-                board._slots[0][5] = Red;
+                board._slots[5][0] = Red;
 
-            } else if ((sf::Mouse::getPosition(window)).x > 145  && sf::Mouse::getPosition(window).x < 235) {
-                CircleRed.setPosition(160, 660);
-                window.draw(CircleRed);
+            }
+            else if ((sf::Mouse::getPosition(window)).x > 145 && sf::Mouse::getPosition(window).x < 235) {
+                board._slots[5][1] = Red;
 
             }
             else if ((sf::Mouse::getPosition(window)).x > 235 && sf::Mouse::getPosition(window).x < 325) {
-                CircleRed.setPosition(260, 660);
-                window.draw(CircleRed);
+                board._slots[5][2] = Red;
 
             }
             else if ((sf::Mouse::getPosition(window)).x > 325 && sf::Mouse::getPosition(window).x < 415) {
-                CircleRed.setPosition(360, 660);
-                window.draw(CircleRed);
+                board._slots[5][3] = Red;
 
-            } else if ((sf::Mouse::getPosition(window)).x > 415 && sf::Mouse::getPosition(window).x < 505) {
-                CircleRed.setPosition(460, 660);
-                window.draw(CircleRed);
+            }
+            else if ((sf::Mouse::getPosition(window)).x > 415 && sf::Mouse::getPosition(window).x < 505) {
+                board._slots[5][4] = Red;
 
-            } else if ((sf::Mouse::getPosition(window)).x > 505 && sf::Mouse::getPosition(window).x < 625) {
-                CircleRed.setPosition(560, 660);
-                window.draw(CircleRed);
+            }
+            else if ((sf::Mouse::getPosition(window)).x > 505 && sf::Mouse::getPosition(window).x < 625) {
+                board._slots[5][5] = Red;
 
-            } else if ((sf::Mouse::getPosition(window)).x > 595 && sf::Mouse::getPosition(window).x < 740) {
-                CircleRed.setPosition(660, 660);
-                window.draw(CircleRed);
+            }
+            else if ((sf::Mouse::getPosition(window)).x > 595 && sf::Mouse::getPosition(window).x < 740) {
+                board._slots[5][6] = Red;
 
             }
 
@@ -176,12 +192,15 @@ int main() {
                 float centerX = (spaceX + radius) * x + radius * (x - 1);
                 // Set the color of the circle
                 sf::Color fillColor;
-               // if (Board.cell[y][x] == Empty) 
-                //fillColor = emptyColor;
+                if (board._slots[y - 1][x - 1] == Empty) {
+                    fillColor = sf::Color::White;
+                 }
+                 //fillColor = emptyColor;
+                ///////Third change was to actually use this if else statement above and below, to set the fill color as white or red depending on the value of the slots struct
                 
-                fillColor = sf::Color::White;
-                //else if (board[y][x] == Red)
-                    //fillColor = redColor;
+                else if (board._slots[y - 1][x - 1] == Red) {
+                    fillColor = redColor;
+                }
                 //else
                     //fillColor = yellowColor;
                 // Set the color of the tokens outline
@@ -197,25 +216,23 @@ int main() {
                 window.draw(Circle);
             }
         }
+
         
-        
 
 
-/*
-        if (sf::Event::MouseButtonPressed) {
+        /*
+                if (sf::Event::MouseButtonPressed) {
+                    if ((sf::Mouse::getPosition(window).x >= 262 && sf::Mouse::getPosition(window).x <= 336) && (sf::Mouse::getPosition(window).y >= 661 && sf::Mouse::getPosition(window).y <= 735)) {
 
-            if ((sf::Mouse::getPosition(window).x >= 262 && sf::Mouse::getPosition(window).x <= 336) && (sf::Mouse::getPosition(window).y >= 661 && sf::Mouse::getPosition(window).y <= 735)) {
-       
-                CircleRed.setPosition(260, 660);
-                window.draw(CircleRed);
+                        CircleRed.setPosition(260, 660);
+                        window.draw(CircleRed);
+                    }
+                }
 
-            }
-        }
-       
-        */
+                */
 
 
-        //window.clear();
+                //window.clear();
 
         window.draw(title);
         window.draw(info);
@@ -231,8 +248,9 @@ int main() {
 
 
 
-    
-    
+
+
 }
+
 
 
