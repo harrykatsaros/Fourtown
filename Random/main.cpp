@@ -29,15 +29,16 @@ int main() {
     int fullcol = 0;
     int r = 0;
 
+    ///initialize the array////
     for (int i = 0; i < 6; i++) {
         for (int j = 0; j < 7; j++) {
 
             array[i][j] = 0;
 
-            cout << array[i][j] << " ";
+            //cout << array[i][j] << " ";
 
         }
-        cout << endl;
+        //cout << endl;
     }
 
     //Assign names and colors to p1, p2
@@ -48,13 +49,48 @@ int main() {
     p2.name = "Player 2";
     p2.color = -1;
 
-    createarray(array);
+    createarray(array);//draws the board
 
     while (r != 2) {
+        
+         sf::RenderWindow window(sf::VideoMode(800, 900), "Connect Four");
+
+        // run the program as long as the window is open
+        while (window.isOpen())
+        {
+
+            sf::Event event;
+            while (window.pollEvent(event))
+            {
+                if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Q)|| (r ==2)) {
+                    window.close();
+                }
+        }
+        
+        // clear the window 
+        window.clear(sf::Color::Black);
+        
+        sf::Font font;
+        if (!font.loadFromFile("arial.ttf"))
+        {
+            cout << "Error" << endl;
+        }
+            
+        sf::RectangleShape rectangle(sf::Vector2f(800.f, 640.f));
+        rectangle.setPosition(0, 130);
+        rectangle.setFillColor(sf::Color::Blue);
+
+        window.draw(rectangle);
+            
         //PLAYER 1 LOOP
+        
+            
         pickc = choosecol(array, p1);
         deleterow(array, p1, pickc);
         createarray(array);
+        
+        
+        
         win = checkwin(array, p1);
 
         if (win == true) {
