@@ -150,37 +150,44 @@ int main() {
 
         //////Second change was to move this up, and take out all the CircleReds and change the individual slots in the struct////
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            for (int i = 5; i > 0; i--) {
+            for (int j = 0; j < 6; j++) {
                 if ((sf::Mouse::getPosition(window)).x > 50 && sf::Mouse::getPosition(window).x < 145) {
-                    board._slots[5-i][0] = Red;
+
+                    board._slots[5 - j][0] = Red;
 
                 }
                 else if ((sf::Mouse::getPosition(window)).x > 145 && sf::Mouse::getPosition(window).x < 235) {
-                    board._slots[5-i][1] = Red;
+
+                    board._slots[5 - j][1] = Red;
 
                 }
                 else if ((sf::Mouse::getPosition(window)).x > 235 && sf::Mouse::getPosition(window).x < 325) {
-                    board._slots[5-i][2] = Red;
+
+                    board._slots[5 - j][2] = Red;
 
                 }
                 else if ((sf::Mouse::getPosition(window)).x > 325 && sf::Mouse::getPosition(window).x < 415) {
-                    board._slots[5-i][3] = Red;
+
+                    board._slots[5 - j][3] = Red;
 
                 }
                 else if ((sf::Mouse::getPosition(window)).x > 415 && sf::Mouse::getPosition(window).x < 505) {
-                    board._slots[5-i][4] = Red;
+
+                    board._slots[5 - j][4] = Red;
 
                 }
                 else if ((sf::Mouse::getPosition(window)).x > 505 && sf::Mouse::getPosition(window).x < 625) {
-                    board._slots[5-i][5] = Red;
+
+                    board._slots[5 - j][5] = Red;
 
                 }
                 else if ((sf::Mouse::getPosition(window)).x > 595 && sf::Mouse::getPosition(window).x < 740) {
-                    board._slots[5-i][6] = Red;
+
+                    board._slots[5 - j][6] = Red;
 
                 }
-
             }
+            
         }
 
         for (int y = 1; y <= BOARD_Y_SIZE; y++)
@@ -193,6 +200,7 @@ int main() {
                 float centerX = (spaceX + radius) * x + radius * (x - 1);
                 // Set the color of the circle
                 sf::Color fillColor;
+
                 if (board._slots[y - 1][x - 1] == Empty) {
                     fillColor = sf::Color::White;
                 }
@@ -217,43 +225,43 @@ int main() {
                 window.draw(Circle);
             }
         }
-        
 
-        if (sf::Event::MouseButtonPressed) {
-            for (int i = 0; i < 600; i += 100) {
+
+        for (int i = 0; i < 6; i += 1) {
+            if (sf::Event::MouseButtonPressed) {
                 if ((sf::Mouse::getPosition(window)).x > 50 && sf::Mouse::getPosition(window).x < 145) {
-                    CircleRed.setPosition(60, 660 - i);
+                    CircleRed.setPosition(60, 660 - (i * 100));
                     window.draw(CircleRed);
                     //board._slots[0][5] = Red; 
 
                 }
                 else if ((sf::Mouse::getPosition(window)).x > 145 && sf::Mouse::getPosition(window).x < 235) {
-                    CircleRed.setPosition(160, 660 - i);
+                    CircleRed.setPosition(160, 660 - (i * 100));
                     window.draw(CircleRed);
 
                 }
                 else if ((sf::Mouse::getPosition(window)).x > 235 && sf::Mouse::getPosition(window).x < 325) {
-                    CircleRed.setPosition(260, 660 - i);
+                    CircleRed.setPosition(260, 660 - (i * 100));
                     window.draw(CircleRed);
 
                 }
                 else if ((sf::Mouse::getPosition(window)).x > 325 && sf::Mouse::getPosition(window).x < 415) {
-                    CircleRed.setPosition(360, 660 - i);
+                    CircleRed.setPosition(360, 660 - (i * 100));
                     window.draw(CircleRed);
 
                 }
                 else if ((sf::Mouse::getPosition(window)).x > 415 && sf::Mouse::getPosition(window).x < 505) {
-                    CircleRed.setPosition(460, 660 - i);
+                    CircleRed.setPosition(460, 660 - (i * 100));
                     window.draw(CircleRed);
 
                 }
                 else if ((sf::Mouse::getPosition(window)).x > 505 && sf::Mouse::getPosition(window).x < 625) {
-                    CircleRed.setPosition(560, 660 - i);
+                    CircleRed.setPosition(560, 660 - (i * 100));
                     window.draw(CircleRed);
 
                 }
                 else if ((sf::Mouse::getPosition(window)).x > 595 && sf::Mouse::getPosition(window).x < 740) {
-                    CircleRed.setPosition(660, 660 - i);
+                    CircleRed.setPosition(660, 660 - (i * 100));
                     window.draw(CircleRed);
 
                 }
