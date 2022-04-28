@@ -65,7 +65,7 @@ int main() {
                 if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Q)|| (r ==2)) {
                     window.close();
                 }
-        }
+            }
         
         // clear the window 
         window.clear(sf::Color::Black);
@@ -118,6 +118,7 @@ int main() {
             cout << "The board is full, it is a draw!" << endl; //assign check = 3 (draw)
             r = restart(array);
         }
+    }
     }
     return 0;
 }
