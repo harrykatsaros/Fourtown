@@ -1,5 +1,0 @@
-﻿  main.cpp
-C:\Users\henga\source\repos\Random\Random\main.cpp(235,27): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\henga\source\repos\Random\Random\main.cpp(239,31): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\henga\source\repos\Random\Random\main.cpp(254,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Random.vcxproj -> C:\Users\henga\source\repos\Random\x64\Debug\Random.exe
