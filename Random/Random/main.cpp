@@ -61,6 +61,9 @@ int main()
                     pickc = choosecol(array, current,mouse_position);
                     if (pickc != 7) {
                         deleterow(array, current, pickc);
+                        win = checkwin(array, current);
+
+                        
                         //drawstuff(window, current, font);
                         //createarray(array, window);
                         //window.display();
@@ -73,10 +76,37 @@ int main()
                         }
                     }
                 }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+                    current = p1;
+                    restart(array);
+                    win = false;
+                    fullcol = 0;
+                }
             }
             window.clear(sf::Color::Black);
-            drawstuff(window, current, font);
-            createarray(array, window);
+            if (win == true) {
+                displaywinner(current, window,font);
+
+            }
+            else if(fullcol == 1 ){
+                sf::Color wordColor(150, 200, 224);
+
+                sf::Text restartscreen;
+                restartscreen.setFont(font);
+                restartscreen.setString("Press R to restart!");
+                restartscreen.setCharacterSize(50);
+                restartscreen.setFillColor(wordColor);
+                restartscreen.setStyle(sf::Text::Bold);
+                restartscreen.setOrigin(120, 0);
+                restartscreen.setPosition(200.f, 400.f);
+
+                window.draw(restartscreen);
+            }
+            else {
+                drawstuff(window, current, font);
+                createarray(array, window);
+
+            }
             window.display();
             
         }

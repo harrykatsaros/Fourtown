@@ -20,8 +20,8 @@ void deleterow(int array[][col], player active, int pickc);
 void createarray(int array[][col], sf::RenderWindow &window);
 bool checkwin(int array[][col], player active);
 int checkfull(int array[][col]);
-void displaywinner(player active); //ongoing game = 0, player 1 = 1, player 2 = 2, draw = 3
-int restart(int array[][col]);
+void displaywinner(player active, sf::RenderWindow& window, sf::Font& font); //ongoing game = 0, player 1 = 1, player 2 = 2, draw = 3
+void restart(int array[][col]);
 
 void drawstuff(sf::RenderWindow& window, player active, sf::Font &font);
 

@@ -78,16 +78,7 @@ void deleterow(int array[][col], player active, int pickc) {
 }
 
 void createarray(int array[][col], sf::RenderWindow &window) {
-    for (int i = 0; i < 6; i++) {
-        for (int j = 0; j < 7; j++) {
-            if (array[i][j] != 1 && array[i][j] != -1) {
-                array[i][j] = 0;
-            }
-            cout << array[i][j] << " ";
-
-        }
-        cout << endl;
-    }
+    
     for (int y = 1; y <= 6; y++)
     {
         // Get the center of the next row of circles
@@ -163,26 +154,58 @@ int checkfull(int array[][col]) {
     return fullcol;
 }
 
-void displaywinner(player active) { //player 1 = 1, player 2 = 2, draw = 3
+void displaywinner(player active, sf::RenderWindow& window, sf::Font& font) { //player 1 = 1, player 2 = 2, draw = 3
     cout << endl << active.name << " Connected Four, You Win!" << endl;
+
+    sf::Text title;
+    title.setFont(font);
+    title.setString("Connect Four");
+    title.setCharacterSize(50);
+    title.setFillColor(wordColor);
+    title.setStyle(sf::Text::Bold | sf::Text::Underlined);
+    title.setOrigin(150, 0);
+    title.setPosition(400.f, 10.f);
+
+    sf::Text playertitle;
+    playertitle.setFont(font);
+    playertitle.setString(active.name);
+    playertitle.setCharacterSize(50);
+    playertitle.setFillColor(wordColor);
+    playertitle.setStyle(sf::Text::Bold);
+    playertitle.setOrigin(150, 0);
+    playertitle.setPosition(380.f, 780.f);
+
+    sf::Text winscreen;
+    winscreen.setFont(font);
+    winscreen.setString("wins!");
+    winscreen.setCharacterSize(50);
+    winscreen.setFillColor(wordColor);
+    winscreen.setStyle(sf::Text::Bold);
+    winscreen.setOrigin(120,0);
+    winscreen.setPosition(600.f, 780.f);
+
+    sf::Text restartscreen;
+    restartscreen.setFont(font);
+    restartscreen.setString("Press R to restart!");
+    restartscreen.setCharacterSize(50);
+    restartscreen.setFillColor(wordColor);
+    restartscreen.setStyle(sf::Text::Bold);
+    restartscreen.setOrigin(120, 0);
+    restartscreen.setPosition(200.f, 400.f);
+
+    window.draw(title);
+    window.draw(winscreen);
+    window.draw(playertitle);
+    window.draw(restartscreen);
 }
 
-int restart(int array[][col]) {
-    int r;
-
-    cout << "Would you like to restart? Yes(1) No(2): ";
-    cin >> r;
-    if (r == 1) { //button pressed
+void restart(int array[][col]) {
+   
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 array[i][j] = 0;
             }
         }
-    }
-    else {
-        cout << "Bye!" << endl; //EXIT
-    }
-    return r;
 }
 
 void drawstuff(sf::RenderWindow& window, player active, sf::Font &font) {
