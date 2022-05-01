@@ -15,7 +15,7 @@ constexpr auto row = 6;
 constexpr auto col = 7;
 
 
-int choosecol(int array[][col], player active);
+int choosecol(int array[][col], player active, sf::Vector2i mouse_position);
 void deleterow(int array[][col], player active, int pickc);
 void createarray(int array[][col], sf::RenderWindow &window);
 bool checkwin(int array[][col], player active);
@@ -23,6 +23,6 @@ int checkfull(int array[][col]);
 void displaywinner(player active); //ongoing game = 0, player 1 = 1, player 2 = 2, draw = 3
 int restart(int array[][col]);
 
-
+void drawstuff(sf::RenderWindow& window, player active, sf::Font &font);
 
 #endif // !1

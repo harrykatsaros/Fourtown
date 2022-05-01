@@ -15,23 +15,51 @@ sf::Color yellowColor(235, 235, 0);
 sf::Color lineColor(0, 51, 102);
 sf::Color boardColor(0, 102, 153);
 sf::Color highlightColor(255, 153, 0);
+sf::Color wordColor(150, 200, 224);
 
 
-int choosecol(int array[][col], player active) {
-    int pickc;
+int choosecol(int array[][col], player active, sf::Vector2i mouse_position) {
+    int pickc = 7;
 
-    do {
-        cout << active.name << "'s Turn ";
-        cout << "Please enter a number between 0 and 6: ";
-        cin >> pickc;
+    if ((mouse_position.x < 140 && mouse_position.x > 60)) { // check if within each column
 
-        while (array[0][pickc] == 1 || array[0][pickc] == -1) {
-            cout << "Row is full, please choose new number: ";
-            cin >> pickc;
-        }
+        pickc = 0;
 
-    } while (pickc < 0 || pickc > 6);
+    }
+    else if ((mouse_position.x > 160 && mouse_position.x < 240)) {
 
+        pickc = 1;
+
+    }
+    else if ((mouse_position.x > 260 && mouse_position.x < 340)) {
+
+        pickc = 2;
+
+    }
+    else if ((mouse_position.x > 360 && mouse_position.x < 440)) {
+
+        pickc = 3;
+
+    }
+    else if ((mouse_position.x > 460 && mouse_position.x < 540)) {
+
+        pickc = 4;
+
+    }
+    else if ((mouse_position.x > 560 && mouse_position.x < 640)) {
+
+        pickc = 5;
+
+    }
+    else if ((mouse_position.x > 660 && mouse_position.x < 740)) {
+
+        pickc = 6;
+
+    }
+
+    if (array[0][pickc] == 1 || array[0][pickc] == -1) {
+        pickc = 7;
+    }
     return pickc;
 }
 
@@ -155,4 +183,48 @@ int restart(int array[][col]) {
         cout << "Bye!" << endl; //EXIT
     }
     return r;
+}
+
+void drawstuff(sf::RenderWindow& window, player active, sf::Font &font) {
+
+    sf::RectangleShape rectangle(sf::Vector2f(800.f, 640.f));
+    rectangle.setPosition(0, 130);
+    rectangle.setFillColor(sf::Color::Blue);
+
+    window.draw(rectangle);
+
+
+    sf::Text title;
+    title.setFont(font);
+    title.setString("Connect Four");
+    title.setCharacterSize(50);
+    title.setFillColor(wordColor);
+    title.setStyle(sf::Text::Bold | sf::Text::Underlined);
+    title.setOrigin(150, 0);
+    title.setPosition(400.f, 10.f);
+
+    sf::Text playertitle;
+    playertitle.setFont(font);
+    playertitle.setString(active.name);
+    playertitle.setCharacterSize(50);
+    playertitle.setFillColor(wordColor);
+    playertitle.setStyle(sf::Text::Bold);
+    playertitle.setOrigin(150, 0);
+    playertitle.setPosition(380.f, 780.f);
+
+    sf::Text move;
+    move.setFont(font);
+    move.setString("move");
+    move.setCharacterSize(50);
+    move.setFillColor(wordColor);
+    move.setStyle(sf::Text::Bold);
+    move.setOrigin(50, 0);
+    move.setPosition(480.f, 780.f);
+    
+    window.draw(title);
+    
+    window.draw(playertitle);
+
+    window.draw(move);
+
 }
