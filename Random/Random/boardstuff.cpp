@@ -155,7 +155,7 @@ int checkfull(int array[][col]) {
 }
 
 void displaywinner(player active, sf::RenderWindow& window, sf::Font& font) { //player 1 = 1, player 2 = 2, draw = 3
-    cout << endl << active.name << " Connected Four, You Win!" << endl;
+
 
     sf::Text title;
     title.setFont(font);
@@ -182,7 +182,7 @@ void displaywinner(player active, sf::RenderWindow& window, sf::Font& font) { //
     winscreen.setFillColor(wordColor);
     winscreen.setStyle(sf::Text::Bold);
     winscreen.setOrigin(120,0);
-    winscreen.setPosition(600.f, 780.f);
+    winscreen.setPosition(550.f, 780.f);
 
     sf::Text restartscreen;
     restartscreen.setFont(font);
@@ -191,7 +191,7 @@ void displaywinner(player active, sf::RenderWindow& window, sf::Font& font) { //
     restartscreen.setFillColor(wordColor);
     restartscreen.setStyle(sf::Text::Bold);
     restartscreen.setOrigin(120, 0);
-    restartscreen.setPosition(200.f, 400.f);
+    restartscreen.setPosition(300.f, 400.f);
 
     window.draw(title);
     window.draw(winscreen);
@@ -243,11 +243,22 @@ void drawstuff(sf::RenderWindow& window, player active, sf::Font &font) {
     move.setStyle(sf::Text::Bold);
     move.setOrigin(50, 0);
     move.setPosition(480.f, 780.f);
+
+    sf::Text smallreset;
+    smallreset.setFont(font);
+    smallreset.setString("Press r to reset");
+    smallreset.setCharacterSize(20);
+    smallreset.setFillColor(wordColor);
+    smallreset.setStyle(sf::Text::Bold);
+    smallreset.setOrigin(0, 0);
+    smallreset.setPosition(20.f, 20.f);
     
     window.draw(title);
     
     window.draw(playertitle);
 
     window.draw(move);
+
+    window.draw(smallreset);
 
 }
