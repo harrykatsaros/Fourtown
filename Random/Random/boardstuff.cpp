@@ -238,7 +238,25 @@ void displaywinner(player active, sf::RenderWindow& window, sf::Font& font) { //
     window.draw(title);
     window.draw(winscreen);
     window.draw(playertitle);
-    window.draw(restartscreen);
+    //window.draw(restartscreen);
+
+    sf::RectangleShape rectangle(sf::Vector2f(800.f, 640.f));
+    rectangle.setPosition(0, 130);
+    rectangle.setFillColor(sf::Color::Blue);
+
+    window.draw(rectangle);
+
+    sf::Text smallreset;
+    smallreset.setFont(font);
+    smallreset.setString("Press r to reset");
+    smallreset.setCharacterSize(20);
+    smallreset.setFillColor(wordColor);
+    smallreset.setStyle(sf::Text::Bold);
+    smallreset.setOrigin(0, 0);
+    smallreset.setPosition(20.f, 20.f);
+
+    window.draw(smallreset);
+
 }
 
 void restart(int array[][col]) {

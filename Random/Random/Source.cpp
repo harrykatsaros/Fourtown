@@ -58,7 +58,7 @@ int main()
                     cout << current.name << endl;
 
                     pickc = choosecol(array, current, mouse_position);
-                    if (pickc != 7) { //the range of playable moves is 0-6, so if pickc returns 7 that means either the column was full or something bad happened
+                    if (pickc != 7 && win == false) { //the range of playable moves is 0-6, so if pickc returns 7 that means either the column was full or something bad happened
                         deleterow(array, current, pickc);
                         win = checkwin(array, current);
                         full = checkfull(array);
@@ -80,12 +80,16 @@ int main()
                     win = false;
                     fullcol = 0;
                 }
+                else if (mouse_position.y < 741 && mouse_position.y > 159) {
+
+                }
             }
             window.clear(sf::Color::Black);
             if (win == true) {
 
                 displaywinner(current, window, font);
                 createarray(array, window); 
+
 
             }
             else if (full == 7) {
@@ -96,9 +100,9 @@ int main()
                 checkfull.setString("It's a Draw!"); 
                 checkfull.setCharacterSize(50); 
                 checkfull.setFillColor(wordColor); 
-                checkfull.setStyle(sf::Text::Bold | sf::Text::Underlined); 
+                checkfull.setStyle(sf::Text::Bold); 
                 checkfull.setOrigin(100, 0); 
-                checkfull.setPosition(380.f, 200.f); 
+                checkfull.setPosition(200.f, 200.f); 
 
                 sf::Text restartscreen;
                 restartscreen.setFont(font);
