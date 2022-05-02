@@ -51,24 +51,26 @@ int main()
                 if (event.type == sf::Event::Closed || (r == 2)) {
                     window.close();
                 } 
-                else if ((mouse_position.y < 741 && mouse_position.y > 159) && sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // if the screen is clicked within the playable region
-                    cout << mouse_position.x << " " << mouse_position.y << endl;
-                    cout << current.name << endl;
+                else if ((mouse_position.y < 741 && mouse_position.y > 159) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) { // if the screen is clicked within the playable region
                     
-                    pickc = choosecol(array, current,mouse_position);
-                    if (pickc != 7) { //the range of playable moves is 0-6, so if pickc returns 7 that means either the column was full or something bad happened
-                        deleterow(array, current, pickc);
-                        win = checkwin(array, current);
+                        cout << mouse_position.x << " " << mouse_position.y << endl;
+                        cout << current.name << endl;
 
-                        if (win == false) { // as long as no one has won yet, players change
-                            if (current.color == p1.color) {
-                                current = p2;
-                            }
-                            else {
-                                current = p1;
+                        pickc = choosecol(array, current, mouse_position);
+                        if (pickc != 7) { //the range of playable moves is 0-6, so if pickc returns 7 that means either the column was full or something bad happened
+                            deleterow(array, current, pickc);
+                            win = checkwin(array, current);
+
+                            if (win == false) { // as long as no one has won yet, players change
+                                if (current.color == p1.color) {
+                                    current = p2;
+                                }
+                                else {
+                                    current = p1;
+                                }
                             }
                         }
-                    }
+                    
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
                     current = p1;
