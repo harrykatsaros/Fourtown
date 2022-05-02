@@ -77,21 +77,21 @@ void deleterow(int array[][col], player active, int pickc) {
     }
 }
 
-void createarray(int array[][col], sf::RenderWindow &window) {
-    
+void createarray(int array[][col], sf::RenderWindow& window) {
+
     for (int y = 1; y <= 6; y++)
     {
         // Get the center of the next row of circles
-        float centerY = (spaceY + radius) * y + radius * (y-1);
+        float centerY = (spaceY + radius) * y + radius * (y - 1);
         for (int x = 1; x <= 7; x++)
         {
             // Get the center of the next column of circles
-            float centerX = (spaceX + radius) * x + radius * (x-1);
+            float centerX = (spaceX + radius) * x + radius * (x - 1);
             // Set the color of the circle
             sf::Color fillColor;
-            if (array[y-1][x-1] == 0)
+            if (array[y - 1][x - 1] == 0)
                 fillColor = emptyColor;
-            else if (array[y-1][x-1] == 1)
+            else if (array[y - 1][x - 1] == 1)
                 fillColor = redColor;
             else
                 fillColor = yellowColor;
@@ -106,7 +106,7 @@ void createarray(int array[][col], sf::RenderWindow &window) {
             Circle.setPosition(centerX, centerY + 100);
 
             window.draw(Circle);
-            
+
         }
     }
 }
@@ -115,44 +115,77 @@ bool checkwin(int array[][col], player active) {
     bool win = false;
     int findcolor = active.color;
 
-    for (int i = row; i >= 0; --i) {
-        for (int j = col; j >= 0; --j) {
+    for (int i = 0; i <= row; i++) {
+        for (int j = 0; j <= 3; j++) {
 
-            if (array[i][j] == findcolor && array[i][j - 1] == findcolor && array[i][j - 2] == findcolor && array[i][j - 3] == findcolor) { //vertical
-                win = true;
-            }
-
-            else if (array[i][j] == findcolor && array[i][j + 1] == findcolor && array[i][j + 2] == findcolor && array[i][j + 3] == findcolor) { //horizontal right
-                win = true;
-            }
-
-            else if (array[i][j] == findcolor && array[i - 1][j] == findcolor && array[i - 2][j] == findcolor && array[i - 3][j] == findcolor) { //horizontal left
-                win = true;
-            }
-
-            else if (array[i][j] == findcolor && array[i - 1][j - 1] == findcolor && array[i - 2][j - 2] == findcolor && array[i - 3][j - 3] == findcolor) { //diagonal negative slope
-                win = true;
-            }
-
-            else if (array[i][j] == findcolor && array[i - 1][j + 1] == findcolor && array[i - 2][j + 2] == findcolor && array[i - 3][j + 3] == findcolor) { //diagonal positive slope
+            if (array[i][j] == findcolor && array[i][j + 1] == findcolor && array[i][j + 2] == findcolor && array[i][j + 3] == findcolor) { //horizontal 
                 win = true;
             }
         }
     }
+
+    for (int i = 0; i <= 2; i++) {
+        for (int j = 0; j <= col; j++) {
+
+            if (array[i][j] == findcolor && array[i + 1][j] == findcolor && array[i + 2][j] == findcolor && array[i + 3][j] == findcolor) {  //vertical
+                win = true;
+            }
+        }
+    }
+
+    for (int i = 0; i <= 3; i++) {
+        for (int j = 0; j <= col; j++) {
+
+            if (array[i][j] == findcolor && array[i + 1][j + 1] == findcolor && array[i + 2][j + 2] == findcolor && array[i + 3][j + 3] == findcolor) { //diagonal negative slope
+                win = true;
+
+            }
+        }
+    }
+
+    for (int i = 0; i <= 2; i++) {
+        for (int j = 3; j <= col; j++) {
+
+            if (array[i][j] == findcolor && array[i + 1][j - 1] == findcolor && array[i + 2][j - 2] == findcolor && array[i + 3][j - 3] == findcolor) { //diagonal positive slope
+                win = true;
+            }
+        }
+    }
+
+
+
+
+
     return win;
 }
 
 int checkfull(int array[][col]) {
-    int fullcol = 0;
+    //int findcolor = active.color;
+    int full = 0;
 
-    for (int i = 0; i < col; ++i) {
-        if (array[0][i] != 0) {
-            fullcol = fullcol + 1;
+    if (full != 7) {
+        for (int i = 0; i < 7; i++) {
+            if (array[0][i] != 0) {
+                full++;
+            }
         }
     }
 
-    return fullcol;
+    return full;
+
 }
+
+//int checkfull(int array[][col]) {
+//    int fullcol = 0;
+//
+//    for (int i = 0; i < col; ++i) {
+//        if (array[0][i] != 0) {
+//            fullcol = fullcol + 1;
+//        }
+//    }
+//
+//    return fullcol;
+//}
 
 void displaywinner(player active, sf::RenderWindow& window, sf::Font& font) { //player 1 = 1, player 2 = 2, draw = 3
 
@@ -165,6 +198,15 @@ void displaywinner(player active, sf::RenderWindow& window, sf::Font& font) { //
     title.setStyle(sf::Text::Bold | sf::Text::Underlined);
     title.setOrigin(150, 0);
     title.setPosition(400.f, 10.f);
+
+    sf::Text checkfull;
+    checkfull.setFont(font);
+    checkfull.setString("It's a Draw!");
+    checkfull.setCharacterSize(50);
+    checkfull.setFillColor(wordColor);
+    checkfull.setStyle(sf::Text::Bold | sf::Text::Underlined);
+    checkfull.setOrigin(120, 0);
+    checkfull.setPosition(380.f, 780.f);
 
     sf::Text playertitle;
     playertitle.setFont(font);
@@ -181,7 +223,7 @@ void displaywinner(player active, sf::RenderWindow& window, sf::Font& font) { //
     winscreen.setCharacterSize(50);
     winscreen.setFillColor(wordColor);
     winscreen.setStyle(sf::Text::Bold);
-    winscreen.setOrigin(120,0);
+    winscreen.setOrigin(120, 0);
     winscreen.setPosition(550.f, 780.f);
 
     sf::Text restartscreen;
@@ -200,15 +242,15 @@ void displaywinner(player active, sf::RenderWindow& window, sf::Font& font) { //
 }
 
 void restart(int array[][col]) {
-   
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                array[i][j] = 0;
-            }
+
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            array[i][j] = 0;
         }
+    }
 }
 
-void drawstuff(sf::RenderWindow& window, player active, sf::Font &font) {
+void drawstuff(sf::RenderWindow& window, player active, sf::Font& font) {
 
     sf::RectangleShape rectangle(sf::Vector2f(800.f, 640.f));
     rectangle.setPosition(0, 130);
@@ -252,9 +294,9 @@ void drawstuff(sf::RenderWindow& window, player active, sf::Font &font) {
     smallreset.setStyle(sf::Text::Bold);
     smallreset.setOrigin(0, 0);
     smallreset.setPosition(20.f, 20.f);
-    
+
     window.draw(title);
-    
+
     window.draw(playertitle);
 
     window.draw(move);
