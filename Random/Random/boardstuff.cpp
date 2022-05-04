@@ -9,12 +9,9 @@ using namespace std;
 int spaceY = 20;
 int radius = 40;
 int spaceX = 20;
-sf::Color emptyColor(150, 200, 224);
-sf::Color redColor(214, 30, 0);
-sf::Color yellowColor(235, 235, 0);
-sf::Color lineColor(0, 51, 102);
-sf::Color boardColor(0, 102, 153);
-sf::Color highlightColor(255, 153, 0);
+sf::Color emptytoken(130, 200, 224);
+sf::Color red(214, 30, 0);
+sf::Color yellow(235, 235, 0);
 sf::Color wordColor(150, 200, 224);
 
 
@@ -90,13 +87,12 @@ void createarray(int array[][col], sf::RenderWindow& window) {
             // Set the color of the circle
             sf::Color fillColor;
             if (array[y - 1][x - 1] == 0)
-                fillColor = emptyColor;
+                fillColor = emptytoken;
             else if (array[y - 1][x - 1] == 1)
-                fillColor = redColor;
+                fillColor = red;
             else
-                fillColor = yellowColor;
-            // Set the color of the tokens outline
-            //sf::Color outlineColor;
+                fillColor = yellow;
+            
 
             // Draw the circle in the buffer
             sf::CircleShape Circle(200.f);
@@ -192,7 +188,7 @@ void displaywinner(player active, sf::RenderWindow& window, sf::Font& font) { //
 
     sf::Text title;
     title.setFont(font);
-    title.setString("Connect Four");
+    title.setString("Four in a row");
     title.setCharacterSize(50);
     title.setFillColor(wordColor);
     title.setStyle(sf::Text::Bold | sf::Text::Underlined);
@@ -279,7 +275,7 @@ void drawstuff(sf::RenderWindow& window, player active, sf::Font& font) {
 
     sf::Text title;
     title.setFont(font);
-    title.setString("Connect Four");
+    title.setString("Four in a row");
     title.setCharacterSize(50);
     title.setFillColor(wordColor);
     title.setStyle(sf::Text::Bold | sf::Text::Underlined);

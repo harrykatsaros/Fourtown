@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int main() 
+int main()
 {
     player p1, p2, current;
     int array[row][col];
@@ -12,7 +12,8 @@ int main()
     bool win = false;
     int fullcol = 0;
     int r = 0;
-    
+    int full = 0;
+
     ///initialize the array////
     for (int i = 0; i < 6; i++) {
         for (int j = 0; j < 7; j++) {
@@ -29,48 +30,49 @@ int main()
 
     current = p1;
 
-    while (r != 2) 
+    while (r != 2)
     {
 
-        sf::RenderWindow window(sf::VideoMode(800, 900), "Connect Four");
-        
+        sf::RenderWindow window(sf::VideoMode(800, 900), "Four in a row or column or diagonal");
+
         while (window.isOpen()) // run the program as long as the window is open
         {
             sf::Event event;
 
             sf::Font font;
-            if (!font.loadFromFile("arial.ttf"))
+            if (!font.loadFromFile("sansation.ttf"))
             {
                 cout << "Error" << endl;
             }
 
             sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
-            
+
             while (window.pollEvent(event))
             {
                 if (event.type == sf::Event::Closed || (r == 2)) {
                     window.close();
-                } 
+                }
                 else if ((mouse_position.y < 741 && mouse_position.y > 159) && event.type == event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) { // if the screen is clicked within the playable region
-                    
-                        cout << mouse_position.x << " " << mouse_position.y << endl;
-                        cout << current.name << endl;
 
-                        pickc = choosecol(array, current, mouse_position);
-                        if (pickc != 7) { //the range of playable moves is 0-6, so if pickc returns 7 that means either the column was full or something bad happened
-                            deleterow(array, current, pickc);
-                            win = checkwin(array, current);
+                    cout << mouse_position.x << " " << mouse_position.y << endl;
+                    cout << current.name << endl;
 
-                            if (win == false) { // as long as no one has won yet, players change
-                                if (current.color == p1.color) {
-                                    current = p2;
-                                }
-                                else {
-                                    current = p1;
-                                }
+                    pickc = choosecol(array, current, mouse_position);
+                    if (pickc != 7 && win == false) { //the range of playable moves is 0-6, so if pickc returns 7 that means either the column was full or something bad happened
+                        deleterow(array, current, pickc);
+                        win = checkwin(array, current);
+                        full = checkfull(array);
+
+                        if (win == false) { // as long as no one has won yet, players change
+                            if (current.color == p1.color) {
+                                current = p2;
+                            }
+                            else {
+                                current = p1;
                             }
                         }
-                    
+                    }
+
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
                     current = p1;
@@ -78,15 +80,29 @@ int main()
                     win = false;
                     fullcol = 0;
                 }
+                else if (mouse_position.y < 741 && mouse_position.y > 159) {
+
+                }
             }
             window.clear(sf::Color::Black);
             if (win == true) {
-                
-                displaywinner(current, window,font);
+
+                displaywinner(current, window, font);
+                createarray(array, window);
+
 
             }
-            else if(fullcol == 1 ){
+            else if (full == 7) {
                 sf::Color wordColor(150, 200, 224);
+
+                sf::Text checkfull;
+                checkfull.setFont(font);
+                checkfull.setString("It's a Draw!");
+                checkfull.setCharacterSize(50);
+                checkfull.setFillColor(wordColor);
+                checkfull.setStyle(sf::Text::Bold);
+                checkfull.setOrigin(100, 0);
+                checkfull.setPosition(370.f, 200.f);
 
                 sf::Text restartscreen;
                 restartscreen.setFont(font);
@@ -95,8 +111,9 @@ int main()
                 restartscreen.setFillColor(wordColor);
                 restartscreen.setStyle(sf::Text::Bold);
                 restartscreen.setOrigin(120, 0);
-                restartscreen.setPosition(200.f, 400.f);
+                restartscreen.setPosition(300.f, 400.f);
 
+                window.draw(checkfull);
                 window.draw(restartscreen);
             }
             else {
@@ -105,10 +122,10 @@ int main()
 
             }
             window.display();
-            
+
         }
-        
+
     }
-    
+
     return 0;
 }
